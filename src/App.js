@@ -10,10 +10,30 @@ const App = () => {
     setIsStarted(value=>!value)
   }
   useEffect(()=>{
-    fetch("https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986")
+    fetch("https://opentdb.com/api.php?amount=2&type=multiple&encode=url3986")
       .then(res=> res.json())
-      .then(data=>setQuestionsArray(data))
+      .then(data=>setQuestionsArray(
+        data.results.map((elem)=>{
+          const orderedArr = [ ...elem.incorrect_answers, elem.correct_answer];
+          const shuffledArr= orderedArr.sort(() =>Math.random() - 0.5);
+          return ({
+            answers: shuffledArr,
+            correct: elem.correct_answer,
+            question: elem.question,
+            selected: ''
+          })
+        })
+      ))
   }, [isStarted])
+  function selectAnswer(answer, idOfAnswer, idOfQuestion){
+    setQuestionsArray(prev=>prev.map((e, index)=>{
+      console.log(index===idOfQuestion)
+      return(
+        index===idOfQuestion ? {...e, selected: answer} : {...e}
+  )
+    }))
+    console.log(questionsArray)
+  }
   return (
     <div className='container'>
       <div className='svgs'>
@@ -25,12 +45,16 @@ const App = () => {
                 </svg>
                 </div>
                 {isStarted ? 
-                <div className='question-container'>{(questionsArray.results.map((question)=>{
+                <div className='question-container'>{(questionsArray.map((question, index)=>{
                   return(
-                    <Question question={question} key={question.question}/>
+                    <Question 
+                    question={question} 
+                    key={question.question}
+                    answer={(val, id)=>(selectAnswer(val, id, index))}
+                    />
                   )
                 }))}</div>
-                : <Start startingGame={()=>changingStartState()}/> }
+                : <Start startingGame={()=>(changingStartState())}/> }
     </div>
   )
 }
