@@ -2,7 +2,7 @@
 
 It it's challange given to me as part of course to better understanding of react.
 
-###Course is on scrimba.com
+Course is on scrimba.com
 
 ##Technologies Used
 
