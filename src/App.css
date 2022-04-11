@@ -31,6 +31,14 @@
   height: 400px;
   width: 400px;
 }
+.check-answers{
+  padding: 1rem 1.5rem;
+  color: #FFFFFF;
+  background: #4D5B9E;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 20px;
+}
 
 @media only screen and (min-width: 321px) {
   .blob-1 {
@@ -43,7 +51,9 @@
   }
   .question-container {
     overflow: scroll;
-    margin: 40px 20px 40px;
+    scroll-snap-align: right;
+    scroll-behavior: smooth;
+    margin: 40px 20px 0px;
     max-width: fit-content;
   }
 }

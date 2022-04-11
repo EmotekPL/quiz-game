@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import './index.css'
 
 const Question = (props) => {
   return (
@@ -14,13 +15,14 @@ const Question = (props) => {
               className="question-single-answer"
               key={answer}
               onClick={() => props.answer(answer, id)}
+              style={answer===props.question.selected ? {backgroundColor: `#D6DBF5`, border: `none`} : {backgroundColor: `#FFFFFF`}}
             >
-              {decodeURI(answer)}
+              {decodeURIComponent(answer)}
             </button>
           );
         })}
       </section>
-      <br className="question-line"></br>
+      <hr className="question-line" />
     </div>
   );
 };

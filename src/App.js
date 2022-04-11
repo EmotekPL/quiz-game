@@ -10,7 +10,7 @@ const App = () => {
     setIsStarted((value) => !value);
   }
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=2&type=multiple&encode=url3986")
+    fetch("https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986")
       .then((res) => res.json())
       .then((data) =>
         setQuestionsArray(
@@ -30,11 +30,9 @@ const App = () => {
   function selectAnswer(answer, idOfAnswer, idOfQuestion) {
     setQuestionsArray((prev) =>
       prev.map((e, index) => {
-        console.log(index === idOfQuestion);
         return index === idOfQuestion ? { ...e, selected: answer } : { ...e };
       })
     );
-    console.log(questionsArray);
   }
   return (
     <div className="container">
@@ -73,6 +71,7 @@ const App = () => {
               />
             );
           })}
+          <button className="check-answers">Check answers</button>
         </div>
       ) : (
         <Start startingGame={() => changingStartState()} />
