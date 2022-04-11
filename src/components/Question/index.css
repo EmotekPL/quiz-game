@@ -1,6 +1,6 @@
 .question-wrapper {
   display: flex;
-  width: 80%;
+  width: 95%;
   flex-direction: column;
   text-align: left;
   justify-content: left;
@@ -25,6 +25,7 @@
   padding: 0.3rem 1rem;
   margin-top: 1.25rem;
   cursor: pointer;
+  word-wrap: break-word;
 }
 .question-answers {
   display: flex;

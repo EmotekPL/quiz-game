@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Start from "./components/Start/index.js";
 import Question from "./components/Question/index.js";
+let counter = 0;
 
 const App = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [questionsArray, setQuestionsArray] = useState();
+  const [restart, setRestart] = useState(false);
+  const [isEnded, setIsEnded] = useState(false);
   function changingStartState() {
     setIsStarted((value) => !value);
   }
@@ -26,13 +29,22 @@ const App = () => {
           })
         )
       );
-  }, [isStarted]);
+  }, [isStarted, restart]);
   function selectAnswer(answer, idOfAnswer, idOfQuestion) {
     setQuestionsArray((prev) =>
       prev.map((e, index) => {
         return index === idOfQuestion ? { ...e, selected: answer } : { ...e };
       })
     );
+  }
+  function checkAnswers(){
+    if(counter===1){
+      setRestart(prev=>!prev)
+      counter=0;
+    }else{
+      counter++;
+    }
+    setIsEnded(prev=>!prev) 
   }
   return (
     <div className="container">
@@ -68,10 +80,16 @@ const App = () => {
                 question={question}
                 key={question.question}
                 answer={(val, id) => selectAnswer(val, id, index)}
+                checkScores = {isEnded}
               />
             );
           })}
-          <button className="check-answers">Check answers</button>
+          <section>
+            <div className="score">{}</div>
+            <button className="check-answers" onClick={()=>checkAnswers()}>
+              {!isEnded ? 'Check answers':'Play again'}
+            </button>
+          </section>
         </div>
       ) : (
         <Start startingGame={() => changingStartState()} />
