@@ -31,7 +31,6 @@
   display: flex;
   justify-content: left;
   text-align: left;
-  gap: 15px;
 }
 .question-line {
   width: 100%;
@@ -41,10 +40,12 @@
 @media only screen and (min-width: 321px) {
   .question-answers {
     flex-direction: column;
+    gap: 5px;
   }
 }
 @media only screen and (min-width: 769px) {
   .question-answers {
     flex-direction: row;
+    gap: 15px;
   }
 }
