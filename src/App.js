@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { RingLoader } from "react-spinners";
 import "./App.css";
 import Start from "./components/Start/index.js";
 import Question from "./components/Question/index.js";
+// import Loading from './components/Loading/index.js'
 let counter = 0;
 
 const App = () => {
@@ -9,13 +11,15 @@ const App = () => {
   const [questionsArray, setQuestionsArray] = useState();
   const [restart, setRestart] = useState(false);
   const [isEnded, setIsEnded] = useState(false);
+  const [loading, setLoading] = useState(false);
   function changingStartState() {
     setIsStarted((value) => !value);
   }
   useEffect(() => {
+    setLoading(true);
     fetch("https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986")
       .then((res) => res.json())
-      .then((data) =>
+      .then((data) => {
         setQuestionsArray(
           data.results.map((elem) => {
             const orderedArr = [...elem.incorrect_answers, elem.correct_answer];
@@ -27,8 +31,9 @@ const App = () => {
               selected: "",
             };
           })
-        )
-      );
+        );
+        setLoading(false);
+      });
   }, [isStarted, restart]);
   function selectAnswer(answer, idOfAnswer, idOfQuestion) {
     setQuestionsArray((prev) =>
@@ -37,14 +42,23 @@ const App = () => {
       })
     );
   }
-  function checkAnswers(){
-    if(counter===1){
-      setRestart(prev=>!prev)
-      counter=0;
-    }else{
+  function checkAnswers() {
+    if (counter === 1) {
+      setRestart((prev) => !prev);
+      counter = 0;
+    } else {
       counter++;
     }
-    setIsEnded(prev=>!prev) 
+    setIsEnded((prev) => !prev);
+  }
+  function calculatePoints() {
+    let score = 0;
+    questionsArray.forEach((element) => {
+      if (element.correct === element.selected) {
+        score++;
+      }
+    });
+    return `You scored ${score}/${questionsArray.length} correct answers`;
   }
   return (
     <div className="container">
@@ -72,7 +86,9 @@ const App = () => {
           />
         </svg>
       </div>
-      {isStarted ? (
+      {loading ? (
+        <RingLoader color="#293264" size={`10rem`} />
+      ) : isStarted ? (
         <div className="question-container">
           {questionsArray.map((question, index) => {
             return (
@@ -80,14 +96,14 @@ const App = () => {
                 question={question}
                 key={question.question}
                 answer={(val, id) => selectAnswer(val, id, index)}
-                checkScores = {isEnded}
+                checkScores={isEnded}
               />
             );
           })}
-          <section>
-            <div className="score">{}</div>
-            <button className="check-answers" onClick={()=>checkAnswers()}>
-              {!isEnded ? 'Check answers':'Play again'}
+          <section className="summary">
+            {isEnded && <div className="score">{calculatePoints()}</div>}
+            <button className="check-answers" onClick={() => checkAnswers()}>
+              {!isEnded ? "Check answers" : "Play again"}
             </button>
           </section>
         </div>
