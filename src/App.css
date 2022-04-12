@@ -41,7 +41,6 @@
 }
 .summary {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -71,6 +70,7 @@
   }
   .summary{
     margin-bottom: 10px;
+    flex-direction: column;
   }
 }
 @media only screen and (min-width: 481px) {
@@ -84,6 +84,7 @@
   }
   .summary{
     margin-bottom: 0;
+    flex-direction: row;
   }
 }
 @media only screen and (min-width: 769px) {
