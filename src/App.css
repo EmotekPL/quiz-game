@@ -87,6 +87,15 @@
   }
 }
 @media only screen and (min-width: 769px) {
+  .container{
+    overflow: visible;
+    overflow-x: hidden;
+  }
+  .question-container{
+    margin-bottom: 10px;
+    margin-top: 3.5rem;
+    overflow: visible;
+  }
   .blob-1 {
     left: 80%;
     top: -15%;
@@ -94,9 +103,5 @@
   .blob-2 {
     top: 60%;
     left: -10%;
-  }
-  .question-container {
-    overflow: hidden;
-    margin-top: 0;
   }
 }
