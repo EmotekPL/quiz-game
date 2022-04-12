@@ -6,4 +6,6 @@ Course is on scrimba.com
 
 ## Technologies Used
 
-Create React App
+* Create React App
+* Emotion
+* GH-Pages
