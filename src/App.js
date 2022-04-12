@@ -3,7 +3,6 @@ import { RingLoader } from "react-spinners";
 import "./App.css";
 import Start from "./components/Start/index.js";
 import Question from "./components/Question/index.js";
-// import Loading from './components/Loading/index.js'
 let counter = 0;
 
 const App = () => {
@@ -35,7 +34,7 @@ const App = () => {
         setLoading(false);
       });
   }, [isStarted, restart]);
-  function selectAnswer(answer, idOfAnswer, idOfQuestion) {
+  function selectAnswer(answer, idOfQuestion) {
     setQuestionsArray((prev) =>
       prev.map((e, index) => {
         return index === idOfQuestion ? { ...e, selected: answer } : { ...e };
@@ -95,7 +94,7 @@ const App = () => {
               <Question
                 question={question}
                 key={question.question}
-                answer={(val, id) => selectAnswer(val, id, index)}
+                answer={(val) => selectAnswer(val, index)}
                 checkScores={isEnded}
               />
             );

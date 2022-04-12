@@ -68,7 +68,7 @@
     margin: 40px 20px 0px;
     max-width: fit-content;
   }
-  .summary{
+  .summary {
     margin-bottom: 10px;
     flex-direction: column;
   }
@@ -82,17 +82,17 @@
     top: 60%;
     left: -20%;
   }
-  .summary{
+  .summary {
     margin-bottom: 0;
     flex-direction: row;
   }
 }
 @media only screen and (min-width: 769px) {
-  .container{
+  .container {
     overflow: visible;
     overflow-x: hidden;
   }
-  .question-container{
+  .question-container {
     margin-bottom: 10px;
     margin-top: 160px;
     overflow: visible;
