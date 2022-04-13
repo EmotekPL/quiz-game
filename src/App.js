@@ -7,6 +7,7 @@ let counter = 0;
 
 const App = () => {
   const [isStarted, setIsStarted] = useState(false);
+  const [settings, setSettings] = useState({})
   const [questionsArray, setQuestionsArray] = useState();
   const [restart, setRestart] = useState(false);
   const [isEnded, setIsEnded] = useState(false);
@@ -14,6 +15,16 @@ const App = () => {
   function changingStartState() {
     setIsStarted((value) => !value);
   }
+  useEffect(()=>{
+    setLoading(true);
+    fetch('https://opentdb.com/api_category.php')
+      .then(res=>res.json())
+      .then(data=>{
+        setSettings({...data.trivia_categories, value: ''})
+      });
+      setLoading(false);
+  }, [])
+
   useEffect(() => {
     setLoading(true);
     fetch("https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986")
@@ -107,7 +118,7 @@ const App = () => {
           </section>
         </div>
       ) : (
-        <Start startingGame={() => changingStartState()} />
+        <Start startingGame={() => changingStartState()} settings={()=>handleSettings}/>
       )}
     </div>
   );
