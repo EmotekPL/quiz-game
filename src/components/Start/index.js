@@ -4,13 +4,18 @@ import "./index.css";
 
 const Start = ({ startingGame }) => {
   return (
-    <>
-      <p className="title">Quizzical</p>
-      <p className="description">Test your knowledge!</p>
-      <button onClick={startingGame} className="start-btn">
-        Start quiz
-      </button>
-    </>
+    <div className="start-wrapper">
+      <section>
+        <p className="title">Quizzical</p>
+        <p className="description">Test your knowledge!</p>
+        <button onClick={startingGame} className="start-btn">
+          Start quiz
+        </button>
+      </section>
+      <select>
+          
+      </select>
+    </div>
   );
 };
 Start.propTypes = {
