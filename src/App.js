@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986")
+    fetch("https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986&category=9")
       .then((res) => res.json())
       .then((data) => {
         setQuestionsArray(
