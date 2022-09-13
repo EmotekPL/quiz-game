@@ -12,9 +12,6 @@ const Start = ({ startingGame }) => {
           Start quiz
         </button>
       </section>
-      <select>
-          
-      </select>
     </div>
   );
 };
